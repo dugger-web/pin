@@ -1,0 +1,77 @@
+.cardlist {
+  position: relative;
+
+  // &>div:nth-child(2) {
+  //   height: 225px;
+
+  //   >div {
+  //     height: 225px;
+
+  //     >div {
+  //       height: 225px;
+
+  //       >div {
+  //         height: 225px;
+  //       }
+  //     }
+  //   }
+  // }
+
+  // &>div:nth-child(4) {
+  //   height: 300px;
+
+  //   >div {
+  //     height: 300px;
+
+  //     >div {
+  //       height: 300px;
+
+  //       >div {
+  //         height: 300px;
+  //       }
+  //     }
+  //   }
+  // }
+
+  // &>div:nth-child(5) {
+  //   height: 400px;
+
+  //   >div {
+  //     height: 400px;
+
+  //     >div {
+  //       height: 400px;
+
+  //       >div {
+  //         height: 400px;
+  //       }
+  //     }
+  //   }
+  // }
+
+  // &>div:nth-child(8) {
+  //   height: 225px;
+
+  //   >div {
+  //     height: 225px;
+
+  //     >div {
+  //       height: 225px;
+
+  //       >div {
+  //         height: 225px;
+  //       }
+  //     }
+  //   }
+  // }
+
+  @media (max-width:742px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.cardlistEvent {
+  pointer-events: none;
+}

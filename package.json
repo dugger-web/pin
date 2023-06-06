@@ -6,18 +6,30 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "server": "json-server -w ./server/db.json -p 3001"
   },
   "dependencies": {
+    "@floating-ui/react": "^0.24.0",
+    "@reduxjs/toolkit": "^1.9.5",
     "@types/node": "18.15.13",
     "@types/react": "18.0.38",
     "@types/react-dom": "18.0.11",
     "autoprefixer": "10.4.14",
+    "axios": "^1.3.6",
+    "classnames": "^2.3.2",
     "next": "13.3.1",
     "postcss": "8.4.23",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "tailwindcss": "3.3.1",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.11.2",
     "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^7.0.0",
+    "json-server": "^0.17.3",
+    "sass": "^1.62.0",
+    "tailwindcss": "^3.3.1"
   }
 }

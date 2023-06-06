@@ -1,0 +1,101 @@
+.userAvatar {
+  border-radius: 50%;
+}
+
+.userWrapper {
+  margin: 8px;
+}
+
+.userAcc {
+  display: block;
+  font-weight: 600;
+  padding: 8px 8px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &:hover {
+    border-color: rgb(136, 136, 255);
+    background: rgb(229, 229, 229);
+  }
+}
+
+.userLink {
+  padding: 0 8px;
+
+  &:hover {
+    border-color: rgb(136, 136, 255);
+    background: rgb(229, 229, 229);
+  }
+}
+
+.userLabel {
+  padding: 0 8px;
+}
+
+.userAvatarWrapper {
+  width: 100%;
+}
+
+.userPrivate {
+  color: gray;
+}
+
+.userEmail {
+  color: gray;
+}
+
+.userName {
+  font-weight: 600;
+}
+
+.userLabel {
+  font-size: 12px;
+}
+
+.userIcon {
+  display: flex;
+  justify-content: flex-end;
+  transform: rotate(10deg);
+}
+
+.userAccounts {
+  display: block;
+}
+
+.userLink {
+  display: block;
+  font-weight: 600;
+  width: 310px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.userLinkItem {
+  width: 100%;
+  max-width: 200px;
+}
+
+.userItem {
+  width: 100%;
+}
+
+.userItemBlock {
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 8px 0;
+
+  &:hover {
+    border-color: rgb(136, 136, 255);
+    background: rgb(229, 229, 229);
+  }
+}
+
+.additionally {
+  margin-top: 4px;
+}
+
+.userArrow {
+  margin-left: auto;
+  padding-right: 8px;
+}

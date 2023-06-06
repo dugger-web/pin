@@ -1,0 +1,163 @@
+.headerHome {
+  display: flex;
+  align-items: center;
+
+  @media (max-width:846px) {
+    background-color: transparent;
+    color: #000;
+  }
+}
+
+.popupIdea {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  border-radius: 8px;
+
+  &:hover {
+    background: rgb(232, 232, 232);
+    cursor: pointer;
+  }
+}
+
+.popupCreate {
+  width: 13% !important;
+  position: absolute;
+  left: 7%;
+  padding: 7px;
+  margin-top: 30px;
+  height: 100px !important;
+}
+
+.headerLogo {
+  padding: 13px;
+
+  &:hover {
+    width: 100%;
+    padding: 13px;
+    cursor: pointer;
+    border-radius: 100%;
+    background-color: rgb(228, 228, 228);
+  }
+}
+
+.headerArrow {
+  display: none;
+
+  @media (max-width:846px) {
+    display: block;
+  }
+}
+
+.headerCreate {
+  display: flex;
+  align-items: center;
+
+  @media (max-width:846px) {
+    display: none !important;
+  }
+}
+
+.headerNot,
+.headerMessages,
+.headerAvatar,
+.headerArrow {
+  padding: 13px;
+
+  &:hover {
+    width: 100%;
+    padding: 13px;
+    cursor: pointer;
+    border-radius: 100%;
+    background-color: rgb(228, 228, 228);
+  }
+}
+
+.headerArrowAvatar {
+  padding: 5px;
+
+  >svg {
+    width: 13px;
+    height: 13px;
+    padding-top: 2px;
+  }
+
+  &:hover {
+    width: 100%;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 100%;
+    background-color: rgb(228, 228, 228);
+  }
+}
+
+.requestSearch {
+  padding: 16px;
+}
+
+.requestName {
+  padding: 5px 20px;
+  background-color: rgb(234, 234, 234);
+
+  margin-right: 7px;
+  border-radius: 7px;
+}
+
+.requestRemove {
+  margin-left: 15px;
+}
+
+.ideaWrapper {
+  object-fit: contain;
+}
+
+.ideaImage {
+  display: block;
+  max-width: 432px;
+  max-height: 152px;
+  width: auto;
+  height: auto;
+  background-size: cover;
+  border-radius: 20px;
+}
+
+.ideaName {
+  color: #fff;
+  text-align: center;
+}
+
+.ideaList {
+  width: 100%;
+  max-width: 832px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.ideaItem {
+  margin-right: 10px;
+}
+
+.ideaContent {
+  position: relative;
+
+  &::after {
+    content: '';
+    width: 192px;
+    height: 82px;
+    // width: auto;
+    // height: auto;
+    border-radius: 16px;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.ideaName {
+  position: absolute;
+}

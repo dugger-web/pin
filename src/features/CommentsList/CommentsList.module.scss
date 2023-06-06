@@ -1,0 +1,76 @@
+.commentsWrapper {
+  margin-top: 60px;
+}
+
+.commentsTitle {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.commentsIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin-left: 7px;
+  cursor: pointer;
+
+  &:hover {
+    cursor: pointer;
+    border-radius: 100%;
+    background-color: rgb(228, 228, 228);
+  }
+}
+
+.commentIconActive {
+  transform: rotate(-90deg);
+}
+
+.inputAvatar {
+  border-radius: 100%;
+}
+
+.inputList {
+  position: relative;
+  height: 250px;
+}
+
+.inputComment {
+  max-width: 405px;
+  height: 55px;
+  padding-left: 10px !important;
+  cursor: pointer;
+}
+
+.inputActive {
+  background-color: transparent !important;
+  border: 1px solid #ccc !important;
+  cursor: text;
+}
+
+.inputContent {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  padding-top: 20px;
+}
+
+.inputWrapperComment {
+  position: relative;
+  width: 100%;
+  height: 65px;
+}
+
+.inputSend {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.inputLinear {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  top: 0;
+}
