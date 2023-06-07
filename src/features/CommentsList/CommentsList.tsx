@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 
-import { Comments } from '@/components/Comments/Comments'
+import { Comment } from '@/components/Comment/Comment'
 import { PropsCommentsList } from '@/shared/types/mock_comments'
 
 import ArrowIcon from '/public/assets/images/icons/Arrow.svg'
@@ -13,9 +13,22 @@ import Image from 'next/image'
 import styles from './CommentsList.module.scss'
 import { Input } from '@/components'
 
-export const InputList = () => {
+type PropsInputList = {
+  value: string
+  setValue: (value: string) => void
+  onAdd: (value: string) => void
+}
+
+export const InputList: FC<PropsInputList> = ({ value, setValue, onAdd }) => {
   const [isActive, setIsActive] = useState(false)
-  const [value, setValue] = useState('')
+
+  const addToValue = (value: string) => {
+    if (value.length) {
+      onAdd(value)
+    }
+
+    setValue('')
+  }
 
   return (
     <div className={cn('relative', styles.inputList)}>
@@ -34,15 +47,24 @@ export const InputList = () => {
             placeholder='Добавить комментарий'
             withIcon={false}
           />
-          {value.length ? <SendIcon className={styles.inputSend} /> : null}
+          {value.length ? (
+            <div className='cursor-pointer' onClick={() => addToValue(value)}>
+              <SendIcon className={styles.inputSend} />
+            </div>
+          ) : null}
         </div>
       </div>
     </div>
   )
 }
 
-export const CommentsList: FC<PropsCommentsList> = ({ comments }) => {
+type PropsCommentAdd = {
+  onAdd: (value: string) => void
+}
+
+export const CommentsList: FC<PropsCommentsList & PropsCommentAdd> = ({ comments, onAdd }) => {
   const [show, setShow] = useState(true)
+  const [value, setValue] = useState('')
 
   return (
     <div>
@@ -55,8 +77,12 @@ export const CommentsList: FC<PropsCommentsList> = ({ comments }) => {
             <ArrowIcon width={20} height={20} />
           </div>
         </div>
-        {show && comments.map(comment => <Comments key={comment.id} {...comment} />)}
-        <InputList />
+        <div className={cn('absolute', {
+          [styles.commentList]: comments.length >= 4
+        })}>
+          {show && comments.map(comment => <Comment key={comment.id} {...comment} />)}
+        </div>
+        <InputList value={value} setValue={setValue} onAdd={onAdd} />
       </div>
     </div>
   )

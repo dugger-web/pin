@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useRef, useState } from 'react'
 
 import LoveIcon from '/public/assets/images/icons/Love.svg'
 import LoveControll from '/public/assets/images/icons/Controll.svg'
@@ -10,13 +10,18 @@ import { PropsComments } from '@/shared/types/mock_comments'
 
 import cn from 'classnames'
 
-import styles from './Comments.module.scss'
+import styles from './Comment.module.scss'
 import Link from 'next/link'
+import { Popup } from '@/features'
+import { useOnClickOutside } from '@/shared/hooks/useOutsideClick'
 
-export const Comments: FC<PropsComments> = ({ id, name, comment, avatarUrl }) => {
+export const Comment: FC<PropsComments> = ({ id, name, comment, avatarUrl }) => {
   const [overMouse, setOverMouse] = useState(false)
   const [isLiked, setIsLiked] = useState(false)
   const [isHeart, setIsHeart] = useState(false)
+  const [popup, setPopup] = useState(false)
+
+  const ref = useRef(null)
 
   const onMouseEnter = () => {
     setOverMouse(true)
@@ -26,9 +31,11 @@ export const Comments: FC<PropsComments> = ({ id, name, comment, avatarUrl }) =>
     setOverMouse(false)
   }
 
+  useOnClickOutside(ref, () => setPopup(false))
+
   return (
     <div>
-      <div className='flex'>
+      <div className='flex mb-4'>
         <div>
           <img src={avatarUrl} className={styles.commentsImage} alt={name as string} />
         </div>
@@ -63,19 +70,24 @@ export const Comments: FC<PropsComments> = ({ id, name, comment, avatarUrl }) =>
             </div>) : (
               <div>
                 {isLiked && (
-                  <div onClick={() => setIsLiked(false)}>
+                  <div className='cursor-pointer' onClick={() => setIsLiked(false)}>
                     <LoveLiked className={styles.commentLove} />
                   </div>
                 )}
                 {isHeart && (
-                  <div onClick={() => setIsHeart(false)}>
+                  <div className='cursor-pointer' onClick={() => setIsHeart(false)}>
                     <Like />
                   </div>
                 )}
               </div>
             )}
-            <div className={cn('ml-3 cursor-pointer', styles.commentControll)}>
-              <LoveControll />
+            <div ref={ref}>
+              <div onClick={() => setPopup(!popup)} className={cn(styles.commentControll, 'ml-3 relative cursor-pointer')}>
+                <LoveControll />
+              </div>
+              {popup && <Popup className={styles.commentPopup}>
+
+              </Popup>}
             </div>
           </div>
         </div>

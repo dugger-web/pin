@@ -7,7 +7,7 @@ import styles from './Button.module.scss'
 type PropsButton = {
   children: ReactNode
   className?: string
-  variant: 'dark' | 'transparent'
+  variant: 'dark' | 'transparent' | 'access'
   onClick: () => void
 }
 

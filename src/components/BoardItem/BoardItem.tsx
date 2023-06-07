@@ -20,7 +20,7 @@ export const BoardItem: FC<PropsBoardItem> = ({ id, name, image }) => {
           <Image className={cn(styles.boardImage)} width={48} height={48} src={image} alt={name} />
           <span className='ml-2 mt-3'>{name}</span>
         </div>
-        <Button variant='transparent' className={styles.boardBtn} onClick={() => { }}>
+        <Button variant='access' className={styles.boardBtn} onClick={() => { }}>
           Сохранить
         </Button>
       </div>

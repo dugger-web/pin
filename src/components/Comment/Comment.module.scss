@@ -42,3 +42,10 @@
     transform: translateY(10deg);
   }
 }
+
+.commentPopup {
+  position: absolute;
+  width: 150px;
+  height: 100px;
+  min-height: 0;
+}
