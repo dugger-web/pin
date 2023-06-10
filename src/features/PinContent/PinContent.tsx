@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 import { TypeCardList } from '@/shared/types/mock_card'
 import Image from 'next/image'
@@ -11,26 +11,90 @@ import { Button } from '@/components/Button/Button'
 import { CommentsList } from '../CommentsList/CommentsList'
 import { mock_comments } from '@/shared/mocks/mock_comments'
 
-import styles from './DetailsContent.module.scss'
+import styles from './PinContent.module.scss'
 import { Popup } from '../Popup/Popup'
 import { ModalCard } from '../ModalCard/ModalCard'
+import { getComments, isHeartComment, isLikedComment, isWithoutHeartComment, isWithoutLikedComment, postComment } from '@/shared/api/endpoints'
+import { PropsComments } from '@/shared/types/mock_comments'
 
-type PropsDetailsContent = TypeCardList
+type PropsPinContent = TypeCardList
 
-export const DetailsContent: FC<PropsDetailsContent> = ({ cards }) => {
-  const [comments, setComments] = useState(mock_comments)
+export const PinContent: FC<PropsPinContent> = ({ cards }) => {
+  const [comments, setComments] = useState([])
   const [popup, setPopup] = useState(false)
 
-  const onAddNewComment = (value: string) => {
-    const comment = {
-      id: 1,
-      comment: value,
-      name: 'Amirkhan',
-      avatarUrl: 'https://i.pinimg.com/75x75_RS/c3/14/6c/c3146c156e286e73812ba09aab08b265.jpg',
-    }
+  const getNewComments = async () => {
+    try {
+      const data = await getComments()
 
-    setComments(prevState => [...prevState, comment] as never)
+      setComments(data as never[])
+    } catch (error) {
+      console.log('Error:', error)
+    }
   }
+
+  const onAddNewComment = async (value: string) => {
+    try {
+      const comment = {
+        id: Date.now(),
+        comment: value,
+        name: 'Amirkhan',
+        avatarUrl: 'https://i.pinimg.com/75x75_RS/c3/14/6c/c3146c156e286e73812ba09aab08b265.jpg',
+        isLiked: false,
+        isHeart: false
+      }
+
+      setComments(prevState => [...prevState, comment] as never)
+
+      postComment(comment)
+    } catch (error) {
+      console.log('Error:', error)
+    }
+  }
+
+  const liked = async (id: number) => {
+    try {
+      await isLikedComment(id)
+
+      setComments(prevState => prevState.map((comment: PropsComments) => comment.id === id ? { ...comment, isLiked: true } : comment) as never[])
+    } catch (error) {
+      console.log('Error:', error)
+    }
+  }
+
+  const hearted = async (id: number) => {
+    try {
+      await isHeartComment(id)
+
+      setComments(prevState => prevState.map((comment: PropsComments) => comment.id === id ? { ...comment, isHeart: true } : comment) as never[])
+    } catch (error) {
+      console.log('Error:', error)
+    }
+  }
+
+  const withoutLiked = async (id: number) => {
+    try {
+      await isWithoutLikedComment(id)
+
+      setComments(prevState => prevState.map((comment: PropsComments) => comment.id === id ? { ...comment, isLiked: false } : comment) as never[])
+    } catch (error) {
+      console.log('Error:', error)
+    }
+  }
+
+  const withoutHeart = async (id: number) => {
+    try {
+      await isWithoutHeartComment(id)
+
+      setComments(prevState => prevState.map((comment: PropsComments) => comment.id === id ? { ...comment, isHeart: false } : comment) as never[])
+    } catch (error) {
+      console.log('Error:', error)
+    }
+  }
+
+  useEffect(() => {
+    getNewComments()
+  }, [])
 
   return (
     <div>
@@ -73,7 +137,14 @@ export const DetailsContent: FC<PropsDetailsContent> = ({ cards }) => {
                   <Button variant='access' className={styles.detailsSave} onClick={() => { }}>Сохранить</Button>
                 </div>
               </div>
-              <CommentsList comments={comments} onAdd={onAddNewComment} />
+              <CommentsList
+                comments={comments}
+                onAdd={onAddNewComment}
+                setIsLiked={liked}
+                setIsHeart={hearted}
+                setWithoutLiked={withoutLiked}
+                setWithoutHeart={withoutHeart}
+              />
             </div>
           </div>
         </div>

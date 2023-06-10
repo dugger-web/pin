@@ -15,13 +15,22 @@ import Link from 'next/link'
 import { Popup } from '@/features'
 import { useOnClickOutside } from '@/shared/hooks/useOutsideClick'
 
-export const Comment: FC<PropsComments> = ({ id, name, comment, avatarUrl }) => {
+export const Comment: FC<PropsComments> = ({ id, name, comment, avatarUrl, isLiked, isHeart, setIsHeart, setIsLiked, setWithoutLiked, setWithoutHeart }) => {
   const [overMouse, setOverMouse] = useState(false)
-  const [isLiked, setIsLiked] = useState(false)
-  const [isHeart, setIsHeart] = useState(false)
-  const [popup, setPopup] = useState(false)
 
-  const ref = useRef(null)
+  const overlay = useRef<HTMLDivElement>(null)
+
+  const [popupId, setPopupId] = useState<string | number | boolean>(false)
+
+  const onClickPopupId = (idx: string | number) => {
+    setPopupId(idx)
+
+    if (popupId) {
+      setPopupId(false)
+    }
+  }
+
+  useOnClickOutside(overlay, () => setPopupId(false))
 
   const onMouseEnter = () => {
     setOverMouse(true)
@@ -31,11 +40,9 @@ export const Comment: FC<PropsComments> = ({ id, name, comment, avatarUrl }) => 
     setOverMouse(false)
   }
 
-  useOnClickOutside(ref, () => setPopup(false))
-
   return (
-    <div>
-      <div className='flex mb-4'>
+    <div className={styles.commentItem}>
+      <div className={cn('flex mb-4', styles.commentItemWrap)}>
         <div>
           <img src={avatarUrl} className={styles.commentsImage} alt={name as string} />
         </div>
@@ -53,10 +60,10 @@ export const Comment: FC<PropsComments> = ({ id, name, comment, avatarUrl }) => 
             >
               {overMouse ? (
                 <div className={cn('flex items-center relative', styles.commentReview)}>
-                  <div onClick={() => setIsLiked(true)} className={cn('mr-2 cursor-pointer')}>
+                  <div onClick={() => setIsLiked!(id)} className={cn('mr-2 cursor-pointer')}>
                     <LoveLiked className={styles.commentLove} />
                   </div>
-                  <div onClick={() => setIsHeart(true)} className={'cursor-pointer'}>
+                  <div onClick={() => setIsHeart!(id)} className={'cursor-pointer'}>
                     <Like />
                   </div>
                 </div>
@@ -70,22 +77,22 @@ export const Comment: FC<PropsComments> = ({ id, name, comment, avatarUrl }) => 
             </div>) : (
               <div>
                 {isLiked && (
-                  <div className='cursor-pointer' onClick={() => setIsLiked(false)}>
+                  <div className='cursor-pointer' onClick={() => setWithoutLiked!(id)}>
                     <LoveLiked className={styles.commentLove} />
                   </div>
                 )}
                 {isHeart && (
-                  <div className='cursor-pointer' onClick={() => setIsHeart(false)}>
+                  <div className='cursor-pointer' onClick={() => setWithoutHeart!(id)}>
                     <Like />
                   </div>
                 )}
               </div>
             )}
-            <div ref={ref}>
-              <div onClick={() => setPopup(!popup)} className={cn(styles.commentControll, 'ml-3 relative cursor-pointer')}>
+            <div ref={overlay}>
+              <div onClick={() => onClickPopupId(id)} className={cn(styles.commentControll, 'ml-3 relative cursor-pointer')}>
                 <LoveControll />
               </div>
-              {popup && <Popup className={styles.commentPopup}>
+              {popupId === id && <Popup className={styles.commentPopup}>
 
               </Popup>}
             </div>

@@ -2,7 +2,7 @@ import { FC, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '@/shared/hooks'
 import { useRouter } from 'next/router'
 import { fetchItems } from '@/store/reducers/itemsSlice'
-import { DetailsContent } from '@/features/DetailsContent/DetailsContent'
+import { PinContent } from '@/features/PinContent/PinContent'
 
 export const PinPage: FC = () => {
   const dispatch = useAppDispatch()
@@ -20,7 +20,7 @@ export const PinPage: FC = () => {
 
   return (
     <div className='wrapper'>
-      <DetailsContent cards={pin} />
+      <PinContent cards={pin} />
       {error && <h2>{error}</h2>}
     </div>
   )

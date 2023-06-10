@@ -3,6 +3,10 @@
   justify-content: center;
   align-items: center;
   margin-top: 20px;
+
+  @media (max-width:1052px) {
+    display: block;
+  }
 }
 
 .detailsContent {
@@ -12,6 +16,12 @@
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 20px 0px;
   border-top-right-radius: 32px;
   border-bottom-right-radius: 32px;
+
+  @media (max-width:1052px) {
+    border-bottom-right-radius: 32px;
+    border-bottom-left-radius: 32px;
+    border-top-right-radius: 0;
+  }
 }
 
 .detailsImage {
@@ -19,6 +29,12 @@
   border-bottom-left-radius: 32px;
   width: 508px;
   height: 508px;
+
+  @media (max-width:1052px) {
+    border-top-right-radius: 32px;
+    border-top-left-radius: 32px;
+    border-bottom-left-radius: 0;
+  }
 }
 
 .detailsSave {

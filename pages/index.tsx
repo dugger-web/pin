@@ -1,7 +1,7 @@
-import { ExamplePage } from '@/pages/ExamplePage'
+import { HomePage } from '@/pages/HomePage/HomePage'
 
 import { NextPage } from 'next'
 
-const Example: NextPage = () => <ExamplePage />
+const Home: NextPage = () => <HomePage />
 
-export default Example
+export default Home

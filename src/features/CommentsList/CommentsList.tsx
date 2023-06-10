@@ -16,7 +16,7 @@ import { Input } from '@/components'
 type PropsInputList = {
   value: string
   setValue: (value: string) => void
-  onAdd: (value: string) => void
+  onAdd: (value: string) => void,
 }
 
 export const InputList: FC<PropsInputList> = ({ value, setValue, onAdd }) => {
@@ -31,7 +31,7 @@ export const InputList: FC<PropsInputList> = ({ value, setValue, onAdd }) => {
   }
 
   return (
-    <div className={cn('relative', styles.inputList)}>
+    <div className={styles.inputList}>
       <div className={styles.inputContent}>
         <div>
           <Image width={50} height={50} className={styles.inputAvatar} src={AvatarImage} alt='' />
@@ -60,27 +60,52 @@ export const InputList: FC<PropsInputList> = ({ value, setValue, onAdd }) => {
 
 type PropsCommentAdd = {
   onAdd: (value: string) => void
+  setIsLiked?: (id: number, isLiked?: boolean) => void
+  setIsHeart?: (id: number, isHeart?: boolean) => void
+
+  setWithoutLiked?: (id: number, isLiked?: boolean) => void
+  setWithoutHeart?: (id: number, isHeart?: boolean) => void
 }
 
-export const CommentsList: FC<PropsCommentsList & PropsCommentAdd> = ({ comments, onAdd }) => {
+export const CommentsList: FC<PropsCommentsList & PropsCommentAdd> = ({ comments, onAdd, setIsLiked, setIsHeart, setWithoutLiked, setWithoutHeart }) => {
   const [show, setShow] = useState(true)
   const [value, setValue] = useState('')
 
   return (
     <div>
       <div className={styles.commentsWrapper}>
-        <div className='flex items-center mb-8'>
-          <h2 className={styles.commentsTitle}>{comments.length} комментарий</h2>
-          <div onClick={() => setShow(!show)} className={cn(styles.commentsIcon, {
-            [styles.commentIconActive]: !show
-          })}>
-            <ArrowIcon width={20} height={20} />
+        {comments.length ? (
+          <div className='flex items-center mb-8'>
+            <h2 className={styles.commentsTitle}>{comments.length} комментарий</h2>
+            <div onClick={() => setShow(!show)} className={cn(styles.commentsIcon, {
+              [styles.commentIconActive]: !show
+            })}>
+              <ArrowIcon width={20} height={20} />
+            </div>
           </div>
-        </div>
-        <div className={cn('absolute', {
-          [styles.commentList]: comments.length >= 4
-        })}>
-          {show && comments.map(comment => <Comment key={comment.id} {...comment} />)}
+        ) : (
+          <div>
+            <h2 className={styles.commentsTitle}>
+              Комментарии
+            </h2>
+            <p className={styles.commentsDescription}>
+              У вас еще нет комментариев. Добавьте комментарий, чтобы начать обсуждение.
+            </p>
+          </div>
+        )}
+        <div className={cn({ [styles.commentList]: comments.length >= 4 })}>
+          <div>
+            {show && comments.map(comment => (
+              <Comment
+                key={comment.id}
+                {...comment}
+                setIsHeart={setIsHeart}
+                setIsLiked={setIsLiked}
+                setWithoutLiked={setWithoutLiked}
+                setWithoutHeart={setWithoutHeart}
+              />
+            ))}
+          </div>
         </div>
         <InputList value={value} setValue={setValue} onAdd={onAdd} />
       </div>

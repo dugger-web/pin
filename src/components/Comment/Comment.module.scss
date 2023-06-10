@@ -1,3 +1,7 @@
+.commentItem {
+  position: relative;
+}
+
 .commentsImage {
   width: 32px;
   height: 32px;
@@ -44,8 +48,11 @@
 }
 
 .commentPopup {
-  position: absolute;
-  width: 150px;
-  height: 100px;
-  min-height: 0;
+  position: absolute !important;
+  left: 20% !important;
+  width: 150px !important;
+  height: 100px !important;
+  min-height: 0 !important;
+  z-index: 10000000 !important;
+  background-color: #fff;
 }

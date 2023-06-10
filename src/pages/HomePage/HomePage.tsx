@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/shared/hooks"
 import { fetchItems } from "@/store/reducers/itemsSlice"
 import { useDebounce } from "@/shared/hooks/useDebounce";
 
-export const ExamplePage = () => {
+export const HomePage = () => {
   const dispatch = useAppDispatch()
   const { items, status, error, value } = useAppSelector(state => state.items)
 
