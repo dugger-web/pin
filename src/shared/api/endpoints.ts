@@ -2,11 +2,13 @@ import { PropsComments } from './../types/mock_comments';
 import { api, APIResponseType } from './api';
 
 import { TypeCard } from '../types/mock_card';
+import { PropsPins } from '../types/mock_pins';
 
 const endpoints = {
   items: '/items',
   ideas: '/ideas',
   comments: '/comments',
+  pins: '/pins',
   filterItems: (search?: string) => `/items?q=${search}`,
   partyComment: (id: number) => `/comments/${id}`
 }
@@ -20,11 +22,18 @@ const items = {
   },
   async getComments() {
     return await api.get<APIResponseType<PropsComments[]>>(endpoints.comments).then(({ data }) => data)
+  },
+  async getPins() {
+    return await api.get<APIResponseType<PropsPins[]>>(endpoints.pins).then(({ data }) => data)
   }
 }
 
 export const postComment = (comment: PropsComments) => (
   api.post(endpoints.comments, comment)
+)
+
+export const postPins = (pin: PropsPins) => (
+  api.post(endpoints.pins, pin)
 )
 
 export const isLikedComment = (id: number) => (
@@ -43,4 +52,4 @@ export const isWithoutLikedComment = (id: number) => (
   api.patch(endpoints.partyComment(id), { isLiked: false })
 )
 
-export const { getItems, getIdeas, getComments } = items
+export const { getItems, getIdeas, getComments, getPins } = items
