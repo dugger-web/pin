@@ -9,10 +9,15 @@
   margin-bottom: 20px;
 }
 
+.pinImageWrap {
+  border-radius: 20px;
+}
+
 .pinTitle {
   font-size: 27px;
   font-weight: 600;
 }
+
 
 .pinDescription {
   color: rgb(150, 150, 150);
@@ -45,4 +50,16 @@
   width: 80px;
   left: 0;
   height: 70vh;
+}
+
+.pinImage {
+  border-radius: 30px;
+}
+
+.pinWrapperDescription {
+  margin-left: 50px;
+}
+
+.pinName {
+  position: static;
 }

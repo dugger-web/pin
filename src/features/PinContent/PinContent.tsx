@@ -134,7 +134,7 @@ export const PinContent: FC<PropsPinContent> = ({ cards }) => {
                       </Popup>}
                     </div>
                   </div>
-                  <Button variant='access' className={styles.detailsSave} onClick={() => { }}>Сохранить</Button>
+                  <Button type='button' variant='access' className={styles.detailsSave} onClick={() => { }}>Сохранить</Button>
                 </div>
               </div>
               <CommentsList

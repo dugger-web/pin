@@ -1,8 +1,8 @@
+import { PropsPins } from './../types/mock_pins';
 import { PropsComments } from './../types/mock_comments';
 import { api, APIResponseType } from './api';
 
 import { TypeCard } from '../types/mock_card';
-import { PropsPins } from '../types/mock_pins';
 
 const endpoints = {
   items: '/items',
@@ -30,6 +30,10 @@ const items = {
 
 export const postComment = (comment: PropsComments) => (
   api.post(endpoints.comments, comment)
+)
+
+export const postItem = (item: PropsPins) => (
+  api.post(endpoints.items, item)
 )
 
 export const postPins = (pin: PropsPins) => (

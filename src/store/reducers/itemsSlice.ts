@@ -1,3 +1,5 @@
+import { PropsPins } from '@/shared/types/mock_pins';
+import { postItem } from './../../shared/api/endpoints';
 import { TypeCard } from './../../shared/types/mock_card';
 import { getItems } from "@/shared/api/endpoints"
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
@@ -7,6 +9,16 @@ export const fetchItems = createAsyncThunk('items/fetchItems', async (search: st
     const response = await getItems(search)
 
     return response
+  } catch (error) {
+    return rejectWithValue(error)
+  }
+})
+
+export const fetchAddItem = createAsyncThunk('items/fetchAddItem', async (item: PropsPins, { rejectWithValue }) => {
+  try {
+    const { data } = await postItem(item)
+
+    return data
   } catch (error) {
     return rejectWithValue(error)
   }

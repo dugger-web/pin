@@ -1,35 +1,92 @@
-import { FC, useEffect, useRef, useState } from 'react'
+import { FC, useState } from 'react'
 
-import { Button } from '@/components'
+import { Button, Input } from '@/components'
 import Image from 'next/image'
 
 import ImageView from '/public/assets/images/df016746913dc6cefe09cc822a82636c.jpg'
 import AddSvg from '/public/assets/images/icons/Add.svg'
 
+import { ModalCreate } from '../ModalCreate/ModalCreate'
+import { useAppDispatch } from '@/shared/hooks'
+
+import { Controller, FieldValues, SubmitHandler, useForm } from 'react-hook-form'
+import { fetchAddItem } from '@/store/reducers/itemsSlice'
 
 import styles from './PinBuilder.module.scss'
-import { ModalCreate } from '../ModalCreate/ModalCreate'
-import { useOnClickOutside } from '@/shared/hooks/useOutsideClick'
-import { useAppDispatch, useAppSelector } from '@/shared/hooks'
-import { fetchPins } from '@/store/reducers/pinsSlice'
+import { PropsPins } from '@/shared/types/mock_pins'
 
 export const PinBuilder: FC = () => {
   const dispatch = useAppDispatch()
 
   const [modal, setModal] = useState(false)
-  const pins = useAppSelector(state => state.pins.pins)
-  const [file, setFile] = useState<null | string>(null)
+  const [file, setFile] = useState<null | PropsPins>(null)
 
-  useEffect(() => {
-    dispatch(fetchPins())
-  }, [])
+  const { control, handleSubmit } = useForm({})
+
+  const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
+    const newItem = {
+      id: String(Date.now()),
+      name: data.name,
+      image: file?.image
+    }
+
+    dispatch(fetchAddItem(newItem))
+  }
 
   return (
     <div>
       {file ? (
-        <div>
-          <h2>hello</h2>
-        </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <hr className={styles.pinLinear} />
+            <div className={styles.pinHorizon}>
+              <div>
+                <AddSvg />
+              </div>
+            </div>
+            <div className={styles.pinFullLinear}></div>
+          </div>
+          <div className={styles.pinForm}>
+            <div className='flex justify-end mt-8'>
+              <Button className={styles.pinBtn} type='submit' variant='access' onClick={() => { }}>
+                Опубликовать
+              </Button>
+            </div>
+            <div className='flex justify-center'>
+              <div>
+                <Image
+                  width={375}
+                  height={375}
+                  loader={() => file?.image as string}
+                  className={styles.pinImageWrap}
+                  src={file?.image as string}
+                  alt=''
+                />
+              </div>
+              <div className={styles.pinWrapperDescription}>
+                <Controller
+                  name='name'
+                  control={control}
+                  render={({ field: { onChange, value } }) => (
+                    <>
+                      <label>Название</label>
+                      <Input
+                        placeholder='Добавить название'
+                        value={value}
+                        withIcon={false}
+                        onFocus={() => { }}
+                        onBlur={() => { }}
+                        className={styles.pinName}
+                        onChange={onChange}
+                        type='text'
+                      />
+                    </>
+                  )}
+                />
+              </div>
+            </div>
+          </div>
+        </form>
       ) : (
         <div className={styles.pinContent}>
           <div>
@@ -48,7 +105,7 @@ export const PinBuilder: FC = () => {
               <p className={styles.pinDescription}>
                 Срок действия черновиков истекает через 30 дней после того, как вы впервые их сохранили. Потом они удаляются.
               </p>
-              <Button variant='access' onClick={() => setModal(true)}>Создать новый</Button>
+              <Button type='button' variant='access' onClick={() => setModal(true)}>Создать новый</Button>
             </div>
           </div>
           <div>

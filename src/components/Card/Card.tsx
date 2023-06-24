@@ -10,12 +10,8 @@ import Image from 'next/image'
 import cn from 'classnames'
 
 import { useOnClickOutside } from '@/shared/hooks/useOutsideClick'
-import { Input } from '../Input/Input'
-import { BoardList } from '@/features/BoardList/BoardList'
-import { mock_boards } from '@/shared/mocks/mock_boards'
 
 import ArrowIcon from '/public/assets/images/icons/Arrow.svg'
-import SaveIcon from '/public/assets/images/icons/Save.svg'
 
 import styles from './Card.module.scss'
 import Link from 'next/link'
@@ -57,6 +53,7 @@ export const Card: FC<TypeCard> = ({ id, name, image, className }) => {
               </div>
               <Button
                 variant='access'
+                type='button'
                 onClick={() => { }}
                 className={styles.cardSave}>
                 Сохранить

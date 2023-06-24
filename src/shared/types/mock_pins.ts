@@ -1,5 +1,5 @@
 export type PropsPins = {
-  id: number
+  id: number | string
   name: string
   image: string | ArrayBuffer | null | undefined
 }

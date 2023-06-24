@@ -7,8 +7,8 @@ import QuestionSvg from '/public/assets/images/icons/Questions.svg'
 import DownloadSvg from '/public/assets/images/icons/Download.svg'
 
 import styles from './ModalCreate.module.scss'
-import { useAppDispatch, useAppSelector } from '@/shared/hooks'
-import { fetchAddPin, fetchPins } from '@/store/reducers/pinsSlice'
+import { useAppDispatch } from '@/shared/hooks'
+import { fetchPins } from '@/store/reducers/pinsSlice'
 import { PropsPins } from '@/shared/types/mock_pins'
 
 type PropsModalCreate = {
@@ -61,8 +61,8 @@ export const ModalCreate: FC<PropsModalCreate> = ({ onClose, file, setFile }) =>
             <QuestionSvg className='cursor-pointer' />
           </div>
         </div>
-        <div className={styles.modalDownload}>
-          <div onClick={handleUploadClick}>
+        <div onClick={handleUploadClick} className={cn(styles.modalDownload, 'cursor-pointer')}>
+          <div>
             <DownloadSvg className={styles.modalDownloadIcon} />
           </div>
           <input style={{ display: 'none' }} ref={inputRef} onChange={handleFileChange} type="file" />
