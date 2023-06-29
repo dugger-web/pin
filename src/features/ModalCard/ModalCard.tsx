@@ -41,7 +41,7 @@ export const ModalCard: FC = () => {
                 </div>
                 <span className='ml-2 '>Профиль</span>
               </div>
-              <Button variant='access' className={cn(styles.cardSave, 'mr-2', styles.cardBtnBoard)} onClick={() => { }}>
+              <Button type='button' variant='access' className={cn(styles.cardSave, 'mr-2', styles.cardBtnBoard)} onClick={() => { }}>
                 Сохранить
               </Button>
             </div>

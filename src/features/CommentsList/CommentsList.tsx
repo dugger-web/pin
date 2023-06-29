@@ -65,9 +65,11 @@ type PropsCommentAdd = {
 
   setWithoutLiked?: (id: number, isLiked?: boolean) => void
   setWithoutHeart?: (id: number, isHeart?: boolean) => void
+  onRemove?: (id: number | string) => void
+  onEdit?: (id: number | string, comment: string) => void
 }
 
-export const CommentsList: FC<PropsCommentsList & PropsCommentAdd> = ({ comments, onAdd, setIsLiked, setIsHeart, setWithoutLiked, setWithoutHeart }) => {
+export const CommentsList: FC<PropsCommentsList & PropsCommentAdd> = ({ comments, onAdd, setIsLiked, setIsHeart, setWithoutLiked, setWithoutHeart, onRemove, onEdit }) => {
   const [show, setShow] = useState(true)
   const [value, setValue] = useState('')
 
@@ -103,6 +105,8 @@ export const CommentsList: FC<PropsCommentsList & PropsCommentAdd> = ({ comments
                 setIsLiked={setIsLiked}
                 setWithoutLiked={setWithoutLiked}
                 setWithoutHeart={setWithoutHeart}
+                onRemove={onRemove}
+                onEdit={onEdit}
               />
             ))}
           </div>

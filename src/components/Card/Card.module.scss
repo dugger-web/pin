@@ -1,7 +1,7 @@
 .card {
   position: relative;
   width: 236px;
-  margin: 0 1px;
+  margin: 0 5px;
   margin-bottom: 10px;
 }
 
@@ -108,4 +108,8 @@
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: 16px;
+}
+
+.cardSave {
+  margin-left: 10px;
 }

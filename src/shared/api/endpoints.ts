@@ -10,7 +10,9 @@ const endpoints = {
   comments: '/comments',
   pins: '/pins',
   filterItems: (search?: string) => `/items?q=${search}`,
-  partyComment: (id: number) => `/comments/${id}`
+  partyComment: (id: number) => `/comments/${id}`,
+  actionComment: (id: number | string) => `/comments/${id}`,
+  changeComment: (id: number | string) => `/comments/${id}`
 }
 
 const items = {
@@ -38,6 +40,14 @@ export const postItem = (item: PropsPins) => (
 
 export const postPins = (pin: PropsPins) => (
   api.post(endpoints.pins, pin)
+)
+
+export const deleteComment = (id: number | string) => (
+  api.delete(endpoints.actionComment(id))
+)
+
+export const editComment = (id: number | string, newComment: string) => (
+  api.patch(endpoints.changeComment(id), { comment: newComment })
 )
 
 export const isLikedComment = (id: number) => (

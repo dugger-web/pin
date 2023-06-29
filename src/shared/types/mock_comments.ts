@@ -11,6 +11,9 @@ export type PropsComments = {
 
   setIsHeart?: (id: number, isHeart?: boolean) => void
   setWithoutHeart?: (id: number, isHeart?: boolean) => void
+
+  onRemove?: (id: number | string) => void
+  onEdit?: (id: number | string, comment: string) => void
 }
 
 

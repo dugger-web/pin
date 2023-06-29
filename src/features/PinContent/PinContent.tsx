@@ -14,7 +14,7 @@ import { mock_comments } from '@/shared/mocks/mock_comments'
 import styles from './PinContent.module.scss'
 import { Popup } from '../Popup/Popup'
 import { ModalCard } from '../ModalCard/ModalCard'
-import { getComments, isHeartComment, isLikedComment, isWithoutHeartComment, isWithoutLikedComment, postComment } from '@/shared/api/endpoints'
+import { deleteComment, editComment, getComments, isHeartComment, isLikedComment, isWithoutHeartComment, isWithoutLikedComment, postComment } from '@/shared/api/endpoints'
 import { PropsComments } from '@/shared/types/mock_comments'
 
 type PropsPinContent = TypeCardList
@@ -47,6 +47,25 @@ export const PinContent: FC<PropsPinContent> = ({ cards }) => {
       setComments(prevState => [...prevState, comment] as never)
 
       postComment(comment)
+    } catch (error) {
+      console.log('Error:', error)
+    }
+  }
+
+  const onEditComment = async (id: number | string, comment: string) => {
+    try {
+      const commentEdit = comments.map((comm: PropsComments) => {
+        if (comm.id === id) {
+          comm.comment = comment
+        }
+
+        return comm
+      })
+
+      setComments(commentEdit as never[])
+      console.log(comment)
+
+      await editComment(id, comment)
     } catch (error) {
       console.log('Error:', error)
     }
@@ -87,6 +106,16 @@ export const PinContent: FC<PropsPinContent> = ({ cards }) => {
       await isWithoutHeartComment(id)
 
       setComments(prevState => prevState.map((comment: PropsComments) => comment.id === id ? { ...comment, isHeart: false } : comment) as never[])
+    } catch (error) {
+      console.log('Error:', error)
+    }
+  }
+
+  const onRemoveItem = async (id: number | string) => {
+    try {
+      await deleteComment(id)
+
+      setComments(prevState => prevState.filter((comment: PropsComments) => comment.id !== id))
     } catch (error) {
       console.log('Error:', error)
     }
@@ -144,6 +173,8 @@ export const PinContent: FC<PropsPinContent> = ({ cards }) => {
                 setIsHeart={hearted}
                 setWithoutLiked={withoutLiked}
                 setWithoutHeart={withoutHeart}
+                onRemove={onRemoveItem}
+                onEdit={onEditComment}
               />
             </div>
           </div>

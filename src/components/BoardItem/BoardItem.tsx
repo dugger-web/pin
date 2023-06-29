@@ -16,7 +16,7 @@ export const BoardItem: FC<PropsBoardItem> = ({ id, name, image }) => {
   return (
     <div>
       <div className={cn('flex justify-between items-center', styles.boardWrap)}>
-        <div className={cn('flex ', styles.boardInfo)}>
+        <div className={cn('flex w-100', styles.boardInfo)}>
           <Image className={cn(styles.boardImage)} width={48} height={48} src={image} alt={name} />
           <span className='ml-2 mt-3'>{name}</span>
         </div>

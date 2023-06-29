@@ -9,7 +9,7 @@ import styles from './CardList.module.scss'
 
 export const CardList: FC<TypeCardList> = ({ cards }) => {
   return (
-    <div className={cn(styles.cardlist, 'mt-3 flex justify-between flex-wrap')}>
+    <div className={cn(styles.cardlist, 'mt-3 flex flex-wrap')}>
       {cards.map(card => <Card key={card.id} {...card} className={styles.card} />)}
     </div>
   )

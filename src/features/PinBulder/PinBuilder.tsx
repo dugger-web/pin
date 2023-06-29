@@ -6,14 +6,17 @@ import Image from 'next/image'
 import ImageView from '/public/assets/images/df016746913dc6cefe09cc822a82636c.jpg'
 import AddSvg from '/public/assets/images/icons/Add.svg'
 
+import cn from 'classnames'
+
 import { ModalCreate } from '../ModalCreate/ModalCreate'
 import { useAppDispatch } from '@/shared/hooks'
 
 import { Controller, FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 import { fetchAddItem } from '@/store/reducers/itemsSlice'
 
-import styles from './PinBuilder.module.scss'
 import { PropsPins } from '@/shared/types/mock_pins'
+
+import styles from './PinBuilder.module.scss'
 
 export const PinBuilder: FC = () => {
   const dispatch = useAppDispatch()
@@ -21,12 +24,14 @@ export const PinBuilder: FC = () => {
   const [modal, setModal] = useState(false)
   const [file, setFile] = useState<null | PropsPins>(null)
 
-  const { control, handleSubmit } = useForm({})
+  const { control, handleSubmit } = useForm()
 
   const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
+    const { name } = data
+
     const newItem = {
       id: String(Date.now()),
-      name: data.name,
+      name,
       image: file?.image
     }
 
@@ -76,7 +81,7 @@ export const PinBuilder: FC = () => {
                         withIcon={false}
                         onFocus={() => { }}
                         onBlur={() => { }}
-                        className={styles.pinName}
+                        className={cn(styles.pinName, 'mt-2')}
                         onChange={onChange}
                         type='text'
                       />

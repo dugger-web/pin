@@ -131,7 +131,7 @@ export const Header: FC<PropsBlur> = ({ focus, setFocus }) => {
               </Button>
               {popupCreate && <Popup className={styles.popupCreate}>
                 <div className={styles.popupIdea}>
-                  <Link href={'/builder/builder'}>
+                  <Link onClick={() => setPopupCreate(false)} href={'/builder/builder'}>
                     <h3>Создать пин-идею</h3>
                   </Link>
                 </div>

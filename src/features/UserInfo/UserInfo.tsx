@@ -17,16 +17,18 @@ export const UserInfo: FC = () => {
           <label className={styles.userLabel}>Сейчас:</label>
           <div className={cn(styles.userProfileWrapper, 'flex items-center w-100')}>
             <Image className={styles.userAvatar} width={60} height={60} src={UserAvatar} alt={''} />
-            <div className={cn(styles.userAvatarWrapper, 'ml-2 w-100')}>
-              <h5 className={styles.userName}>Amirkhan Magomedov</h5>
-              <div className='flex items-center justify-between w-100'>
-                <p className={styles.userPrivate}>Личный</p>
-                <div className={styles.userArrow}>
-                  <svg height="12" width="12" viewBox="0 0 24 24" aria-label="Selected item" role="img"><path d="M9.17 21.75.73 12.79c-.97-1.04-.97-2.71 0-3.75a2.403 2.403 0 0 1 3.53 0l4.91 5.22L19.74 3.03c.98-1.04 2.55-1.04 3.53 0 .97 1.03.97 2.71 0 3.74L9.17 21.75z"></path></svg>
+            <Link href='/profile/profile'>
+              <div className={cn(styles.userAvatarWrapper, 'ml-2 w-100')}>
+                <h5 className={styles.userName}>Amirkhan Magomedov</h5>
+                <div className='flex items-center justify-between w-100'>
+                  <p className={styles.userPrivate}>Личный</p>
+                  <div className={styles.userArrow}>
+                    <svg height="12" width="12" viewBox="0 0 24 24" aria-label="Selected item" role="img"><path d="M9.17 21.75.73 12.79c-.97-1.04-.97-2.71 0-3.75a2.403 2.403 0 0 1 3.53 0l4.91 5.22L19.74 3.03c.98-1.04 2.55-1.04 3.53 0 .97 1.03.97 2.71 0 3.74L9.17 21.75z"></path></svg>
+                  </div>
                 </div>
+                <p className={styles.userEmail}>amirkhanmags@gmail.com</p>
               </div>
-              <p className={styles.userEmail}>amirkhanmags@gmail.com</p>
-            </div>
+            </Link>
           </div>
         </div>
         <div className={styles.userAccounts}>

@@ -5,12 +5,14 @@ import cn from 'classnames'
 import styles from './Button.module.scss'
 
 type PropsButton = {
-  type: 'submit' | 'button'
+  type?: 'submit' | 'button'
   children: ReactNode
   className?: string
-  variant: 'dark' | 'transparent' | 'access'
+  variant?: 'dark' | 'transparent' | 'access'
   onClick: () => void
 }
+
+type VariantClass = 'dark' | 'transparent' | 'access'
 
 export const Button: FC<PropsButton> = (
   {
@@ -22,7 +24,7 @@ export const Button: FC<PropsButton> = (
   }
 ) => {
   return (
-    <button type={type} onClick={onClick} className={cn(styles[variant], className)}>
+    <button type={type} onClick={onClick} className={cn(styles[variant as VariantClass], className)}>
       {children}
     </button>
   )
