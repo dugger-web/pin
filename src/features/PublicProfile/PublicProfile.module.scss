@@ -1,0 +1,45 @@
+.publicProfile {
+  margin-left: 150px;
+  height: 900px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.publicTitle {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.publicImage {
+  border-radius: 50%;
+}
+
+.publicLabel {
+  font-size: 14px;
+}
+
+.publicBtn {
+  padding: 10px 16px;
+}
+
+.publicName,
+.publicSurname {
+  width: 100%;
+  max-width: 240px;
+  position: static !important;
+}
+
+.publicDescription {
+  max-width: 489px;
+  height: 90px;
+}
+
+.publicWebContent {
+  margin-top: 60px;
+}
+
+
+.publicWeb,
+.publicUsername {
+  max-width: 489px;
+}

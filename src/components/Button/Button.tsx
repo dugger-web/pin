@@ -8,11 +8,11 @@ type PropsButton = {
   type?: 'submit' | 'button'
   children: ReactNode
   className?: string
-  variant?: 'dark' | 'transparent' | 'access'
+  variant?: 'dark' | 'transparent' | 'access' | 'light'
   onClick: () => void
 }
 
-type VariantClass = 'dark' | 'transparent' | 'access'
+type VariantClass = 'dark' | 'transparent' | 'access' | 'light'
 
 export const Button: FC<PropsButton> = (
   {

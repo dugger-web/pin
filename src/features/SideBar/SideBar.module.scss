@@ -1,0 +1,11 @@
+.sidebarlink {
+  margin: 12px 0;
+  font-weight: 600;
+  padding: 8px;
+  border-radius: 10px;
+  max-width: 190px;
+
+  &:hover {
+    background-color: #ebebeb;
+  }
+}

@@ -5,9 +5,8 @@ import AvatarImage from '/public/assets/images/avatars-000653139876-l21k8r-t500x
 
 import { Button } from '@/components'
 
-import cn from 'classnames'
-
 import styles from './ProfileUser.module.scss'
+import Link from 'next/link'
 
 export const ProfileUser: FC = () => {
   return (
@@ -21,11 +20,13 @@ export const ProfileUser: FC = () => {
           <span className='mt-3 block'>@amirkhanmags</span>
           <div>0 подписок</div>
           <div className='mt-4'>
-            <Button className={cn(styles.profileShare)} onClick={() => { }}>
+            <Button variant='light' onClick={() => { }}>
               Поделиться
             </Button>
-            <Button className={cn(styles.profileChange, 'ml-2')} onClick={() => { }}>
-              Изменить профиль
+            <Button variant='light' className='ml-2' onClick={() => { }}>
+              <Link href='/settings/settings'>
+                Изменить профиль
+              </Link>
             </Button>
           </div>
         </div>
